@@ -1,9 +1,12 @@
-class MyClass:
-    variable = "blah"
+# classes and objects
 
-    def function(self):
-        print("This is a message inside the class.")
+class myval:
+    var="tarun"
 
-myobjectx = MyClass()
+x=myval()
+y=myval()
 
-myobjectx.variable
+y.var="mohan"
+
+print(x.var)
+print(y.var)
