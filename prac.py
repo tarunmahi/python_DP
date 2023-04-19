@@ -31,3 +31,14 @@ pairage={"tarun":20,"mohan":30,"mishra":60}
 pairage.pop("mohan")
 for name,age in pairage.items():
     print("Mr %s has an age of %d"%(name,age))
+    
+    
+## generators functions
+import random
+
+def ages():
+    for i in range(9):
+        yield random.randint(1,90)
+
+for i in ages():
+    print("mr Tarun ages are %d respectively" %i)
