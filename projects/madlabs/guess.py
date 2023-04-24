@@ -13,3 +13,6 @@ def guess(a):
     
 y=int(input("enter the range "))
 guess(y)
+
+def computer():
+    
