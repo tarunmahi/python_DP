@@ -12,7 +12,7 @@ def guess(a):
     print("yay you are correct")
     
 y=int(input("enter the range "))
-guess(y)
+#guess(y)
 
 def computer():
     
