@@ -20,11 +20,9 @@ class Linkedlist:
             
     def insertat(self,pos,data):
         if pos<0 or pos>self.getlength():
-            raise Exception("invalid range")
+            raise Exception("invalid range given")
         if pos==0:
             self.insertb(data)
-            return
-        
         itr=self.head
         count=0
         while itr:
@@ -54,6 +52,7 @@ class Linkedlist:
         while itr:
             count+=1
             itr=itr.next
+            
         return count
     def print(self):
         
