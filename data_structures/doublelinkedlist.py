@@ -87,12 +87,6 @@ class DoublyLinkedList:
                 print(f"The value {val} is at index {count} ")
             count+=1
             itr=itr.next
-
-
-
-
-
-
 if __name__ == '__main__':
     dll = DoublyLinkedList()
     dll.insertAtStart(1)
