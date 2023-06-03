@@ -35,7 +35,26 @@ class DoublyLinkedList:
                 emp+=str(itr.data)+"-->"
                 itr=itr.next
             print(emp)
-                
+    
+    def insertatval(self,pos ,data):
+        if pos<0 or pos>self.getlen():
+            raise Exception("invalid")
+        
+        if pos==0:
+            self.insertAtStart(data)
+            return
+        else:
+            itr=self.head
+            count=0
+            node=Node(data)
+            while itr:
+                if count==pos-1:
+                    node.next=itr.next
+                    node.prev=itr
+                    itr.next=node
+                    itr.next.prev=node
+                itr=itr.next
+                count+=1
     def delete(self,pos):
         if pos<0 or pos>self.getlen():
             raise Exception("invalid range is given here")
@@ -53,8 +72,6 @@ class DoublyLinkedList:
                             break
                 itr=itr.next
                 count+=1
-                    
-                    
     def getlen(self):
         count=0
         itr=self.head
@@ -62,7 +79,14 @@ class DoublyLinkedList:
             count+=1
             itr=itr.next
         return count
-
+    def search(self,val):
+        itr=self.head
+        count=0
+        while itr:
+            if itr.data==val:
+                print(f"The value {val} is at index {count} ")
+            count+=1
+            itr=itr.next
 
 
 
@@ -78,6 +102,12 @@ if __name__ == '__main__':
     dll.printdll()
     dll.delete(3)
     dll.delete(1)
+    
     dll.delete(0)
+    dll.insertatval(1,40)
+    dll.insertatval(1,15)
+    dll.insertatval(3,100)
+    dll.insertatval(0,12)
+    dll.search(100)
    
     dll.printdll()
