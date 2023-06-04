@@ -1,10 +1,15 @@
-def longest(seq):
-    min_word=min(len(s) for s in values)
+def kadanes(seq):
+    curr_sum=0
+    max_sum=0
     
-    for i in range(min_word):
-        if(len(set(s[i] for s in seq)))>1:
-            return seq[0][:i]
-    return seq[0][:min_word]
+    for i in range(len(seq)):
+        curr_sum=max(seq[i],curr_sum+seq[i])
+        max_sum=max(curr_sum,max_sum)
+    return max_sum
+    
 
-values=["flight","flight","fliame"]
-print(longest(values))
+
+
+
+arr=[-2, 1, -3, 4, -1, 2, 1, -5, 4]
+print(f" the contigous or max sub array of values {arr} is {kadanes(arr)}")
