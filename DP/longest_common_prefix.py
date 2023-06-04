@@ -1,3 +1,4 @@
+
 def longest_common_prefix(strings):
     if not strings:
         return ""
@@ -9,7 +10,7 @@ def longest_common_prefix(strings):
     for i in range(min_length):
         # Check if all characters at index i are the same
         if len(set(s[i] for s in strings)) > 1:
-            return strings[0][:i]  # Return the prefix up to index i
+            return strings[0][:i]  # Return the prefix up to index 
 
     return strings[0][:min_length]  # Return the entire minimum length string
 

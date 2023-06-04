@@ -5,10 +5,6 @@ def longest(seq):
         if(len(set(s[i] for s in seq)))>1:
             return seq[0][:i]
     return seq[0][:min_word]
-    
-
-
-
 
 values=["flight","flight","fliame"]
 print(longest(values))
