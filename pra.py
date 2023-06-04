@@ -1,52 +1,14 @@
-# Python3 program to check for
-# balanced brackets.
-
-# function to check if
-# brackets are balanced
-
-
-def areBracketsBalanced(expr):
-	stack = []
-
-	# Traversing the Expression
-	for char in expr:
-		if char in ["(", "{", "["]:
-
-			# Push the element in the stack
-			stack.append(char)
-		else:
-
-			# IF current character is not opening
-			# bracket, then it must be closing.
-			# So stack cannot be empty at this point.
-			if not stack:
-				return False
-			current_char = stack.pop()
-			if current_char == '(':
-				if char != ")":
-					return False
-			if current_char == '{':
-				if char != "}":
-					return False
-			if current_char == '[':
-				if char != "]":
-					return False
-
-	# Check Empty Stack
-	if stack:
-		return False
-	return True
+def longest(seq):
+    min_word=min(len(s) for s in values)
+    
+    for i in range(min_word):
+        if(len(set(s[i] for s in seq)))>1:
+            return seq[0][:i]
+    return seq[0][:min_word]
+    
 
 
-# Driver Code
-if __name__ == "__main__":
-	expr = "{[}]"
 
-	# Function call
-	if areBracketsBalanced(expr):
-		print("Balanced")
-	else:
-		print("Not Balanced")
 
-# This code is contributed by AnkitRai01 and improved
-# by Raju Pitta
+values=["flight","flight","fliame"]
+print(longest(values))
