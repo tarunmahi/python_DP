@@ -1,79 +1,28 @@
-class Node:
-    def __init__(self,data=None,next=None):
-        self.data=data
-        self.next=next
-class Linkedlist:
-    def __init__(self):
-        self.head=None
-    def insertb(self,data):
-        node=Node(data,self.head)
-        self.head=node
-    def inserte(self,data):
-        node=Node(data)
-        itr=self.head
-        while itr.next:
-            itr=itr.next
-        itr.next=node
-    
-    def print(self):
-        if self.head==None:
-            raise Exception("list is empty")
-        itr=self.head
-        emp=""
-        while itr:
-            emp+=str(itr.data)+"-->"
-            itr=itr.next
-        print(emp)
-    
-    def insertat(self,pos,data):
-        if pos <0 or pos>self.getlen():
-            raise Exception("invalid range")
-        if self.head==None:
-            self.head=Node(data)
-        count=0
-        itr=self.head
-        while itr:
-            if count==pos-1:
-                node=Node(data)
-                node.next=itr.next
-                itr.next=node
-            count+=1
-            itr=itr.next
-    def remove(self,pos):
-        if pos==0:
-            self.head=self.head.next
-        itr=self.head
-        count=0
-        while itr:
-            if count==pos-1:
-                itr.next=itr.next.next
-            count+=1
-            itr=itr.next
-    def getlen(self):
-        itr=self.head
-        count=0
-        while itr:
-            itr=itr.next
-            count+=1
-        return count
-    
-    
-if __name__=="__main__":
-    ll=Linkedlist()
-    ll.insertb(12)
-    ll.insertb(54)
-    ll.insertb(100)
-    ll.print()
-    
-    ll.inserte(22)
-    ll.inserte(21)
-    ll.print()
-    ll.insertat(3,11)
-    ll.insertat(1,45)
-    ll.print()
+class Binary:
+    def __init__(self,seq):
+        self.seq=seq
+    def search(self,target):
+        arr1=self.seq
+        arr2=sorted(arr1)
+        length=len(arr2)
+        print(arr2)
+        left=0
+        right=length-1
+        while left<=right:
+            mid=(left+right)//2
+            if arr2[mid]==target:
+                return mid
+            elif arr2[mid]>target:
+                right=mid-1
+            else:
+                left=mid+1
+        return -1
 
-    ll.remove(3)
-    ll.remove(0)
-    ll.print()
-    ll.getlen()
-    
+arr1=[2,5,1,89,45,31,23,76]
+ll=Binary(arr1)
+result=ll.search(5)
+
+if result==-1:
+    print("element is not found in the series")
+else:
+    print(f"element is found at the index value of {result+1}")
