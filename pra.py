@@ -20,7 +20,7 @@ def heap_sort(seq):
         heapify(seq,i,0)
     return seq
         
-"""
+""
 def insert_sort(seq):
     for i in range(1,len(seq)):
         key=seq[i]
@@ -37,4 +37,42 @@ array = [9, 5, 2, 8, 1, 10]
 sorted_array = insert_sort(array)
 print(sorted_array)
 
+def longest_common_prefix(words):
+    lenmin=min(len(s) for s in words)
+    
+    for i in range(lenmin):
+        if len(set(s[i] for s in words))>1:
+            return words[0][:i]
+    return words[0][:lenmin]
 
+words = ["apple", "appa", "application"]
+common_prefix = longest_common_prefix(words)
+print(common_prefix)
+
+class seq:
+    def isValid(self,arr):
+        list1={"(","[","{"}
+        list2={")","}","]"}
+        pair={')':'(',']':'[','}':'{'}
+        
+        stack=[]
+        for i in range(len(arr)):
+            if i in list1:
+                stack.append(i)
+            if i in list2:
+                if not stack:
+                    return False
+                if stack.pop()!=pair[i]:
+                    return False
+                else:
+                    continue
+        if not stack:
+            return True
+        else:
+            return False
+        
+
+
+seq1="{[({{}{[]{{}[]}}[{}]})]}"
+print(f'whether the value {seq1} is : {seq().isValid(seq1)}')
+"""
