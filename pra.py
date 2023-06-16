@@ -1,28 +1,40 @@
-class Binary:
-    def __init__(self,seq):
-        self.seq=seq
-    def search(self,target):
-        arr1=self.seq
-        arr2=sorted(arr1)
-        length=len(arr2)
-        print(arr2)
-        left=0
-        right=length-1
-        while left<=right:
-            mid=(left+right)//2
-            if arr2[mid]==target:
-                return mid
-            elif arr2[mid]>target:
-                right=mid-1
-            else:
-                left=mid+1
-        return -1
+"""
+def heapify(arr,n,i):
+    largest=i
+    left=2*i+1
+    right=2*i+2
+    if left<n and arr[left]>arr[largest]:
+        largest=left
+    if right<n and arr[right]>arr[largest]:
+        largest=right
+    if largest!=i:
+        arr[i],arr[largest]=arr[largest],arr[i]
+        heapify(arr,n,largest)
+def heap_sort(seq):
+    n=len(seq)
+    
+    for i in range((n//2)-1,-1,-1):
+        heapify(seq,n,i)
+    for i in range(n-1,0,-1):
+        seq[0],seq[i]=seq[i],seq[0]
+        heapify(seq,i,0)
+    return seq
+        
+"""
+def insert_sort(seq):
+    for i in range(1,len(seq)):
+        key=seq[i]
+        j=i-1
+        
+        while j>=0 and key<seq[j]:
+            seq[j+1]=seq[j]
+            j=j-1
+        seq[j+1]=key
+    return seq
 
-arr1=[2,5,1,89,45,31,23,76]
-ll=Binary(arr1)
-result=ll.search(5)
 
-if result==-1:
-    print("element is not found in the series")
-else:
-    print(f"element is found at the index value of {result+1}")
+array = [9, 5, 2, 8, 1, 10]
+sorted_array = insert_sort(array)
+print(sorted_array)
+
+
