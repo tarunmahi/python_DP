@@ -13,6 +13,6 @@ def sieve(num):
         if check_p[i]:
             primes.append(i)
     return primes
-            
+
 limit=10
 print(f"the total prime are an the list is {sieve(limit)}")
