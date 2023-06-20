@@ -30,8 +30,8 @@ class BinarySearchTree:
             self.rec_inorder(node.left)
             print(node.value,end=" ")
             self.rec_inorder(node.right)
-    def minimum(self):
-        temp=self.root
+    def minimum(self,node):
+        temp=node
         while temp.left is not None:
             temp=temp.left
         print(temp.value)
@@ -49,9 +49,8 @@ class BinarySearchTree:
         elif value<node.value:
             return self.rec_search(node.left,value)
         return self.rec_search(node.right,value)
-            
-             
-        
+  
+
 bst = BinarySearchTree()
   
 # Insert values into the tree
@@ -65,13 +64,13 @@ bst.insert(80)
 
 # Perform inorder traversal to print the elements in sorted order
 bst.inorder()  # Output: 20 30 40 50 60 70 80
-bst.minimum()
 bst.maximum()
 result = bst.search(40)
 if result:
     print("Found")
 else:
     print("Not found")
+bst.inorder()
 """
 # Search for a value
 result = bst.search(60)
