@@ -1,52 +1,87 @@
-class HashTable:
-    def __init__(self,size):
-        self.size=size
-        self.table=[[] for _ in range(size)]
-    def hash_func(self,key):
-        return hash(key)%self.size
-    def insert(self,key,value):
-        index=self.hash_func(key)
-        bucket=self.table[index]
-        
-        for i in range(len(bucket)):
-            exis_key,exis_val=bucket[i]
-            if key==exis_key:
-                bucket[i]=((key,value))
-        bucket.append((key,value))
-    def get(self,key):
-        index=self.hash_func(key)
-        bucket=self.table[index]
-        
-        for i in range(len(bucket)):
-            exis_k,exis_v=bucket[i]
-            if key==exis_k:
-                return exis_v
-        return None
-    def remove(self,key):
-        index=self.hash_func(key)
-        bucket=self.table[index]
-        
-        for i in range(len(bucket)):
-            exis_key,exis_val=bucket[i]
-            if key==exis_key:
-                del bucket[i]
+class Node:
+    def __init__(self,value):
+        self.value=value
+        self.left=None
+        self.right=None
+class BinarySearchTree:
+    def __init__(self):
+        self.root=None
+    def insert(self,value):
+        if not self.root:
+            self.root=Node(value)
+        else:
+            self.rec_insert(self.root,value)
+    def rec_insert(self,node,value):
+        if value < node.value:
+            if not node.left:
+                node.left=Node(value)
+            else:
+                self.rec_insert(node.left,value)
+        else:
+            if not node.right:
+                node.right=Node(value)
+            else:
+                self.rec_insert(node.right,value)
+                
+    def inorder(self):
+        self.rec_inorder(self.root)
+    def rec_inorder(self,node):
+        if node:
+            self.rec_inorder(node.left)
+            print(node.value,end=" ")
+            self.rec_inorder(node.right)
+    def search(self,value):
+        return self.rec_search(self.root,value)
+    def rec_search(self,node,value):
+        if node is None or node.value==value:
+            return node
+        if value<node.value:
+            return self.rec_search(node.left,value)
+        return self.rec_search(node.right,value)
+    def delete(self,value):
+        self.root=self.rec_delete(self.root,value)
+    def rec_delete(self,node,value):
+        if node is None:
+            return node
+        if value<node.value:
+            node.left=self.rec_delete(node.left,value)
+        elif value>node.value:
+            node.right=self.rec_delete(node.right,value)
+        else:
+            if not node.left:
+                return node.right
+            if not node.right:
+                return node.left
+            temp=self.minimum(node.right)
+            node.value=temp.value
+            node.right=self.rec_delete(node.right,temp.value)
+        return node
+       
+   
+            
+    def minimum(self,node):
+        temp=node
+        while temp.left:
+            temp=temp.left
+        return temp
+    
+    
+    
+bst = BinarySearchTree()
 
-    def display(self):
-        for i in range(len(self.table)):
-            bucket=self.table[i]
-            print(f"the value of bucket{i} is {bucket}")
-# Example usage:
-hash_table = HashTable(10)
+# Insert values into the tree
+bst.insert(50)
+bst.insert(30)
+bst.insert(20)
+bst.insert(40)
+bst.insert(70)
+bst.insert(60)
+bst.insert(80)
 
-hash_table.insert('apple', 5)
-hash_table.insert('banana', 7)
-hash_table.insert('orange', 2)
-
-print(hash_table.get('apple'))    # Output: 5
-print(hash_table.get('banana'))   # Output: 7
-print(hash_table.get('orange'))   # Output: 2
-print(hash_table.get('grape'))    # Output: None
-
-hash_table.remove('banana')
-
-hash_table.display()
+# Perform inorder traversal to print the elements in sorted order
+bst.inorder()  # Output: 20 30 40 50 60 70 80
+#bst.minimum()
+print(bst.search(40))
+bst.delete(20)
+bst.delete(60)
+bst.inorder()
