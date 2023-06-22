@@ -21,31 +21,27 @@ class BinarySearchTree:
             if not node.right:
                 node.right=Node(value)
             else:
-                self.rec_insert(node.right,value) 
+                self.rec_insert(node.right,value)
+                
     def inorder(self):
-        self.rec_in(self.root)
-    def rec_in(self,node):
+        self.rec_inorder(self.root)
+    def rec_inorder(self,node):
         if node:
-            self.rec_in(node.left)
+            self.rec_inorder(node.left)
             print(node.value,end=" ")
-            self.rec_in(node.right)
+            self.rec_inorder(node.right)
     def search(self,value):
         return self.rec_search(self.root,value)
     def rec_search(self,node,value):
-        if node is None or node.value==value:
+        if node is None or value==node.value:
             return node
         if value<node.value:
             return self.rec_search(node.left,value)
         return self.rec_search(node.right,value)
-    def minimum(self,node):
-        current=node
-        while current.left:
-            current=current.left
-        return current
     def delete(self,value):
         self.root=self.rec_delete(self.root,value)
     def rec_delete(self,node,value):
-        if node is None:
+        if not node:
             return node
         if value<node.value:
             node.left=self.rec_delete(node.left,value)
@@ -54,14 +50,17 @@ class BinarySearchTree:
         else:
             if not node.left:
                 return node.right
-            if not node.right:
+            elif not node.right:
                 return node.left
             temp=self.minimum(node.right)
             node.value=temp.value
             node.right=self.rec_delete(node.right,temp.value)
         return node
-            
-
+    def minimum(self,node):
+        temp=node
+        while temp.left:
+            temp=temp.left
+        return temp 
 
 bst = BinarySearchTree()
 
@@ -79,12 +78,12 @@ bst.inorder()  # Output: 20 30 40 50 60 70 80
 
 
 # Search for a value
-result = bst.search(20)
+result = bst.search(80)
 if result:
     print("Found")
 else:
     print("Not found")
 
 # Delete a value
-bst.delete(70)
+bst.delete(30)
 bst.inorder()
