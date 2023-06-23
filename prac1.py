@@ -80,7 +80,7 @@ bst.insert(70)
 bst.insert(60)
 bst.insert(80)
 
-# Perform inorder traversal to print the elements in sorted order
+# Perform inorder traversal to print the elements in sorted order and way over them for an 
 bst.inorder()  # Output: 20 30 40 50 60 70 80
 #bst.minimum()
 print(bst.search(40))
