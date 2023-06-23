@@ -1,4 +1,5 @@
 class Node:
+
     def __init__(self,value):
         self.value=value
         self.left=None
@@ -67,6 +68,7 @@ class BinarySearchTree:
     
     
     
+
 bst = BinarySearchTree()
 
 # Insert values into the tree
@@ -85,3 +87,5 @@ print(bst.search(40))
 bst.delete(20)
 bst.delete(60)
 bst.inorder()
+bst.inorder_traversal()  # Output: 20 30 
+
