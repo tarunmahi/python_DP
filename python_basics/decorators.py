@@ -18,7 +18,7 @@ def hello_decorator(func):
 	return inner1
 
 
-# defining a function, to be called inside wrapper
+# defining a function be called inside wrapper
 def function_to_be_used():
 	print("This is inside the function !!")
 
