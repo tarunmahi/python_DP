@@ -21,3 +21,17 @@ Cat=cat("whiskers")
 
 Dog.speak()
 Cat.speak()
+
+class values:
+    def __init__(self,name):
+        self.name=name
+        self.val=2345
+        self.hero="tarun"
+
+class vars(values):
+    def speak(self):
+        print(f"his name is given by mr {self.name} and his balance is {self.val} given by {self.hero} as status")
+        
+        
+boss=vars("dhoni")
+boss.speak()
