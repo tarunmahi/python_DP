@@ -1,68 +1,79 @@
 class Node:
-    def __init__(self,value):
-        self.value=value
-        self.left=None
-        self.right=None
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
 class BinarySearchTree:
     def __init__(self):
-        self.root=None
-    def insert(self,value):
+        self.root = None
+
+    def insert(self, value):
         if self.root is None:
-            self.root=Node(value)
+            self.root = Node(value)
         else:
-            self.rec_insert(self.root,value)
-    def rec_insert(self,node,value):
-        if value<node.value:
+            self._insert_recursive(self.root, value)
+
+    def _insert_recursive(self, node, value):
+        if value < node.value:
             if node.left is None:
-                node.left=Node(value)
+                node.left = Node(value)
             else:
-                self.rec_insert(node.left,value)
+                self._insert_recursive(node.left, value)
         else:
             if node.right is None:
-                node.right=Node(value)
+                node.right = Node(value)
             else:
-                self.rec_insert(node.right,value)
-    def minimum(self,node):
-        temp=node
-        while temp.left is not None:
-            temp=temp.left
-        print(temp.value)
-    def maximum(self):
-        temp=self.root
-        while temp.right:
-            temp=temp.right
-        print(temp.value)
-        
+                self._insert_recursive(node.right, value)
 
-        if value<node.value:
-            return self.rec_search(node.left,value)
-        return self.rec_search(node.right,value)
-    def delete(self,value):
-        self.root=self.rec_delete(self.root,value)
-    def rec_delete(self,node,value):
-        if not node:
+    def search(self, value):
+        return self._search_recursive(self.root, value)
+
+    def _search_recursive(self, node, value):
+        if node is None or node.value == value:
             return node
-        if value<node.value:
-            node.left=self.rec_delete(node.left,value)
-        elif value>node.value:
-            node.right=self.rec_delete(node.right,value)
-        else:
-            if not node.left:
-                return node.right
-            elif not node.right:
-                return node.left
-            temp=self.minimum(node.right)
-            node.value=temp.value
-            node.right=self.rec_delete(node.right,temp.value)
-        return node
-    def minimum(self,node):
-        temp=node
-        while temp.left:
-            temp=temp.left
-        return temp 
+        if value < node.value:
+            return self._search_recursive(node.left, value)
+        return self._search_recursive(node.right, value)
 
+    def delete(self, value):
+        self.root = self._delete_recursive(self.root, value)
+
+    def _delete_recursive(self, node, value):
+        if node is None:
+            return node
+        if value < node.value:
+            node.left = self._delete_recursive(node.left, value)
+        elif value > node.value:
+            node.right = self._delete_recursive(node.right, value)
+        else:
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            temp = self._find_minimum(node.right)
+            node.value = temp.value
+            node.right = self._delete_recursive(node.right, temp.value)
+        return node
+
+    def _find_minimum(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current
+
+    def inorder_traversal(self):
+        self._inorder_recursive(self.root)
+
+    def _inorder_recursive(self, node):
+        if node is not None:
+            self._inorder_recursive(node.left)    # Traverse the left subtree
+            print(node.value, end=" ")            # Print the value of the current node
+            self._inorder_recursive(node.right)   # Traverse the right subtree
+
+# Create a binary search tree instance
 bst = BinarySearchTree()
-  
+
 # Insert values into the tree
 bst.insert(50)
 bst.insert(30)
@@ -73,24 +84,15 @@ bst.insert(60)
 bst.insert(80)
 
 # Perform inorder traversal to print the elements in sorted order
-bst.inorder()  # Output: 20 30 40 50 60 70 80
-
-bst.maximum()
-result = bst.search(40)
-if result:
-    print("Found")
-else:
-    print("Not found")
-bst.inorder()
-"""
+bst.inorder_traversal()  # Output: 20 30 40 50 60 70 80
 
 # Search for a value
-result = bst.search(80)
+result = bst.search(60)
 if result:
     print("Found")
 else:
     print("Not found")
 
 # Delete a value
-bst.delete(30)
-bst.inorder()
+bst.delete(20)
+bst.inorder_traversal()  # Output: 20 40 50 60 70 80
