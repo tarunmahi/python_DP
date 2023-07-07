@@ -19,9 +19,6 @@ def heap_sort(seq):
         heapify(seq,i,0)
     return seq
 
-
-
-
 array = [9, 5, 2, 8, 1, 10]
 sorted_array = heap_sort(array)
 print(sorted_array)

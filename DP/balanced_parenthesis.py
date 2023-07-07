@@ -4,7 +4,6 @@ class seq:
         opening=set("([{")
         closing=set(")]}")
         pair={")":"(","]":"[","}":"{"}
-        
         for x in seq:
             if x in opening:
                 stack.append(x)
