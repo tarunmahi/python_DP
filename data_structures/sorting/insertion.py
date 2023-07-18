@@ -1,6 +1,6 @@
 """
 time complexity:- o(n^2)
-space complexity:- o(1) inplace ssorting algorithmn
+space complexity:- o(1) inplace sorting algorithmn
 """
 
 def insertion_sort(arr):
