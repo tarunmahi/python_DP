@@ -1,3 +1,8 @@
+"""
+time complexity:- o(nlog(n))
+space complexity:- o(1) [inplace sorting algorithm]
+"""
+
 def heapify(arr,n,i):
     largest=i
     left=i*2+1
