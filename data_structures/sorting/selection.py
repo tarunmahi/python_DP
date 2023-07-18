@@ -1,4 +1,6 @@
-"""_summary_
+"""
+space complexity:- o(n^2)
+time complexity:- o(1)
 """
 def selection_sort(arr):
     n=len(arr)
