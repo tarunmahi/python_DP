@@ -56,7 +56,41 @@ class heap:
         
 """
 
-arr=[5,4,3,1,2,7,6,5,34,12,98,65,38]
 
-val=heap()
-print(val.heap_sort(arr))
+"""
+def bs(arr,low,high,val):
+    mid=(low+high)//2
+    if(arr[mid]==val):
+        return mid;
+    elif(arr[mid]>val):
+        bs(arr,low,mid-1,val)
+    elif(arr[mid]<val):
+        bs(arr,mid+1,high,val)
+    else:
+        return 0
+key=bs(arr,0,len(arr)-1,val)
+
+if(key):
+    print(f"element found at index {key}")
+else:
+    print("element  not found")
+    
+"""
+
+def insertion_sort(arr):
+    n=len(arr)
+    for i in range(n):
+        key=arr[i]
+        j=i-1
+        
+        while j>=0 and key<arr[j]:
+            arr[j+1]=arr[j]
+            j-=1
+        arr[j+1]=key
+    return arr
+
+
+
+arr=[5,4,3,1,2,7,6,5,34,12,98,25,65,38]
+print(insertion_sort(arr))
+
