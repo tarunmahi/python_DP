@@ -1,71 +1,74 @@
-
-class quicksort:
-    def quicksort(self,arr,low,high):
-        if low<high:
-            pivotindex=self.partition(arr,low,high)
-            self.quicksort(arr,low,pivotindex-1)
-            self.quicksort(arr,pivotindex+1,high)
-        return arr
-    def partition(self,arr,low,high):
-        pivot=arr[low]
-        left=low+1
-        right=high
+class Node:
+    def __init__(self,data=None,next=None):
+        self.data=data
+        self.next=next
+class LL:
+    def __init__(self):
+        self.head=None
+    def insert_bi(self,data):
+        node=Node(data,self.head)
+        self.head=node
+    def insert_end(self,data):
+        if self.head==None:
+            self.insert_bi(data)
+            return
+        itr=self.head
+        while itr.next:
+            itr=itr.next
+        itr.next=Node(data,None)
         
-        done=False
-        while not done:
-            while left<=right and arr[left]<=pivot:
-                left+=1
-            while right>=left and arr[right]>=pivot:
-                right-=1
-            if right<left:
-                done=True
-            else:
-                arr[left],arr[right]=arr[right],arr[left]
-        arr[right],arr[low]=arr[low],arr[right]
-        return right
-        
-        
-        
-        
-        
-arr1=[4,2,7,9,22,165,789,345,672,432,56,43,87,99,12354,65,78,990]
-val=quicksort()
-print(val.quicksort(arr1,0,len(arr1)-1))
-"""
-def quick_sort_inplace(arr, low, high):
-    if low < high:
-        # Partition the array into two parts
-        pivot_index = partition(arr, low, high)
-
-        # Recursively sort the subarrays
-        quick_sort_inplace(arr, low, pivot_index-1)
-        quick_sort_inplace(arr, pivot_index + 1, high)
-
-def partition(arr, low, high):
-    pivot = arr[low]
-    left = low + 1
-    right = high
-
-    done = False
-    while not done:
-        while left <= right and arr[left] <= pivot:
-            left = left + 1
-        while arr[right] >= pivot and right >=left:
-            right = right -1
-        if right < left:
-            done= True
+    def insert_pos(self,data,pos):
+        if pos<0 and pos>self.getlen():
+            raise Exception("invalid range")
+        if pos==0:
+            self.insert_bi(data)
+            return
         else:
-            # Swap arr[left] and arr[right]
-            arr[left], arr[right] = arr[right], arr[left]
-
-    # Swap arr[low] and arr[right]
-    arr[low], arr[right] = arr[right], arr[low]
-
-    return right
-
-# Example usage:
-if __name__ == "__main__":
-    unsorted_array = [3, 6, 8, 10, 1, 2, 1]
-    quick_sort_inplace(unsorted_array, 0, len(unsorted_array) - 1)
-    print(unsorted_array)
-"""
+            count=0
+            itr=self.head
+            while itr:
+                if count==pos-1:
+                    node=Node(data,itr.next)
+                    itr.next=node
+                itr=itr.next
+                count+=1
+                
+                
+    def remove(self,pos):
+        if pos<0 and pos>self.getlen():
+            raise Exception("invalid range")
+        count=0
+        itr=self.head
+        while itr:
+            if count==pos-1:
+                itr.next=itr.next.next
+            itr=itr.next
+            count+=1
+    def getlen(self):
+        count=0
+        itr=self.head
+        while itr:
+            count+=1
+            itr=itr.next
+        return count
+    def print(self):
+        itr=self.head
+        emp=""
+        while itr:
+            emp+=str(itr.data)+"-->"
+            itr=itr.next
+        print(emp)
+    
+    
+    
+ll=LL()
+ll.insert_bi(24)
+ll.insert_bi(12)
+ll.insert_end(90)
+ll.insert_bi(5)
+ll.insert_end(13)
+ll.print()
+ll.remove(3)
+ll.insert_pos(50,3)
+ll.print()
+print(ll.getlen())
