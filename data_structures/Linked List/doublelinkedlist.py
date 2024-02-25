@@ -23,8 +23,8 @@ class DoublyLinkedList:
             node=Node(data)
             while itr.next:
                 itr=itr.next
-            itr.next=node
             node.prev=itr.next
+            itr.next=node
     def printdll(self):
         if self.head==None:
             print("the list is empty")
@@ -102,6 +102,7 @@ if __name__ == '__main__':
     dll.insertatval(1,15)
     dll.insertatval(3,100)
     dll.insertatval(0,12)
+    dll.insertAtEnd(5)
     dll.search(100)
    
     dll.printdll()
